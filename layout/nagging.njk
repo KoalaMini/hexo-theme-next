@@ -1,0 +1,22 @@
+{% extends '_layout.njk' %}
+{% import '_macro/sidebar.njk' as sidebar_template with context %}
+
+{% block title %}{{ title }}{% if theme.index_with_subtitle and subtitle %} - {{ subtitle }}{% endif %}{% endblock %}
+
+{% block class %}nagging posts-expand{% endblock %}
+
+{% block content %}
+
+  {%- for page in site.pages.toArray() %}
+    {%- if page.type == 'nagging' %}
+      {{ partial('_macro/nagging.njk', {page: page, is_index: true}) }}
+    {%- endif %}
+  {%- endfor %}
+
+  {%- include '_partials/pagination.njk' -%}
+
+{% endblock %}
+
+{% block sidebar %}
+  {{ sidebar_template.render(false) }}
+{% endblock %}
